@@ -1,10 +1,28 @@
 #!/usr/bin/env bash
 
-{
-    "Buckets": [
-        {
-            "Name": "itoromfon-newbucket654321",
-            "CreationDate": "September 1, 2024, 04:40:56 (UTC+01:00)"
-        }
-    ]
-}
+# Exit immediately if any command return a non zero status
+set -e
+
+# where we will store this files
+OUTPUT_DIR="/tmp/S3-bash-scripts"
+
+# lets create a output folder
+mkdir -p $OUTPUT_DIR
+
+# Generate a random number between 5 and 10
+NUM_FILES=$((5 + RANDOM % 6))
+
+echo "Creating $NUM_FILES random files..."
+
+# Loop to create the files
+for ((i = 1; i <= NUM_FILES; i++)); do
+  # Generate a random file name
+  FILE_NAME="$OUTPUT_DIR/file_$RANDOM.txt"
+  
+  # Create the file
+  touch "$FILE_NAME"
+  
+  echo "Created $FILE_NAME"
+done
+
+tree $OUTPUT_DIR
