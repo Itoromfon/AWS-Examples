@@ -1,28 +1,25 @@
 #!/usr/bin/env bash
 
-# Exit immediately if any command return a non zero status
-set -e
+echo ".. put object"
 
-# where we will store this files
-OUTPUT_DIR="/tmp/S3-bash-scripts"
+# Check for bucket name
+if [ -z "$1" ]; then
+  echo "Error: There need to be a bucket name provided."
+  exit 1
+fi
 
-# lets create a output folder
-mkdir -p $OUTPUT_DIR
+# Check for filename 
+if [ -z "$2" ]; then
+  echo "Error: There need to be a file name provided."
+  exit 1
+fi
 
-# Generate a random number between 5 and 10
-NUM_FILES=$((5 + RANDOM % 6))
+BUCKET_NAME=$1
+FILENAME=$2
 
-echo "Creating $NUM_FILES random files..."
+OBJECT_KEY=$(basename "$FILENAME")
 
-# Loop to create the files
-for ((i = 1; i <= NUM_FILES; i++)); do
-  # Generate a random file name
-  FILE_NAME="$OUTPUT_DIR/file_$RANDOM.txt"
-  
-  # Create the file
-  touch "$FILE_NAME"
-  
-  echo "Created $FILE_NAME"
-done
-
-tree $OUTPUT_DIR
+aws s3api put-object \
+--bucket $BUCKET_NAME \
+--body $FILENAME \
+--key $OBJECT_KEY

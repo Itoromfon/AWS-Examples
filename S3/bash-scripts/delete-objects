@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+echo ".. delete objects"
+
+# Exit immediately if any command return a non zero status
+set -e
+
+# Check for bucket name
+if [ -z "$1" ]; then
+  echo "Error: There need to be a bucket name provided."
+  exit 1
+fi
+
+BUCKET_NAME=$1
+
+aws s3api list-objects-v2 \
+--bucket $BUCKET_NAME \
+--query Contents[].key \ 
+#| jq -r 'Contents[].key' \ 
+| jq -n '{objects: [inputs | .[] | {key: .}]}' > /tmp/delete_objects.json
+
+aws s3api delete-objects --bucket $BUCKET_NAME --delete $DELETE_JSON file:///tmp/delete_objects.json
+
