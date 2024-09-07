@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AccessControlPolicy>
+    <Owner>
+        <ID>d57d6ad1ce1e1d8f0c3044d05267d1739a435179eab6fcd551780ea278098a65</ID>
+        <DisplayName>admin-owner</DisplayName>
+    </Owner>
+    <AccessControlList>
+        <Grant>
+            <Grantee xsi:type="CanonicalUser" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <ID>d57d6ad1ce1e1d8f0c3044d05267d1739a435179eab6fcd551780ea278098a65</ID>
+                <DisplayName>Itoromfon</DisplayName>
+            </Grantee>
+            <Permission>READ</Permission>
+        </Grant>
+        <Grant>
+            <Grantee xsi:type="CanonicalUser" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <ID>canonical-user-98765</ID>
+                <DisplayName>user456</DisplayName>
+            </Grantee>
+            <Permission>WRITE</Permission>
+        </Grant>
+    </AccessControlList>
+    <Policy>
+        <PolicyId>Policy-002</PolicyId>
+        <Description>Access control policy for specific users</Description>
+        <Target>
+            <AnyOf>
+                <AllOf>
+                    <Match>
+                        <AttributeDesignator Category="User" AttributeId="canonical-user-id"/>
+                        <AttributeValue DataType="string">canonical-user-54321</AttributeValue>
+                    </Match>
+                    <Match>
+                        <AttributeDesignator Category="Resource" AttributeId="resource-id"/>
+                        <AttributeValue DataType="string">bucket-001</AttributeValue>
+                    </Match>
+                </AllOf>
+            </AnyOf>
+        </Target>
+        <Rule RuleId="Rule-01" Effect="Permit">
+            <Description>Allow user123 to read the resource</Description>
+            <Condition>
+                <Apply FunctionId="string-equal">
+                    <AttributeDesignator Category="Action" AttributeId="action-id"/>
+                    <AttributeValue DataType="string">read</AttributeValue>
+                </Apply>
+            </Condition>
+        </Rule>
+        <Rule RuleId="Rule-02" Effect="Deny">
+            <Description>Deny user456 from deleting the resource</Description>
+            <Condition>
+                <Apply FunctionId="string-equal">
+                    <AttributeDesignator Category="Action" AttributeId="action-id"/>
+                    <AttributeValue DataType="string">delete</AttributeValue>
+                </Apply>
+            </Condition>
+        </Rule>
+    </Policy>
+</AccessControlPolicy>
