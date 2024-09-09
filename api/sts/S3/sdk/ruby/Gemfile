@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+# to create a gem file we use bundler to do that.
+
+gem 'aws-sdk-s3' #that where we get our libraries from. we are going to b using d 3rd version
+gem 'pry' # debugging tool for making break point in ruby
+gem 'nokogiri' # use for parsing xml
+gem 'base64'
+gem 'bigdecimal'
+
+# after we gotten all this library in our gem file we can now use thhe bundle install
+
+
+
+
+
