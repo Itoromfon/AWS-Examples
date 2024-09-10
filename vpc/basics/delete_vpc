@@ -1,1 +1,35 @@
 #!/usr/bin/env bash
+
+# VPC IGW SUBNET RT
+
+if [ -z "$1" ]; then
+echo "Argument not provided"
+else
+  export VPC_ID="$1"
+fi
+
+if [ -z "$2" ]; then
+echo "Argument not provided"
+else
+  export IGW_ID="$2"
+fi
+
+if [ -z "$3" ]; then
+echo "Argument not provided"
+else
+  export SUBNET_ID="$3"
+fi
+
+if [ -z "$4" ]; then
+echo "Argument not provided"
+else
+  export RT_ID="$4"
+fi
+
+# detach the IGW
+
+# delete the IGW
+
+# delete vpc
+
+ aws ec2 delete-vpc --vpc-id $VPC_ID
