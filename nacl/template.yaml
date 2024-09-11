@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation Template to launch an EC2 instance in a specific VPC
+
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+  VpcID:
+    Type: String
+    Default: vpc-377188989156289
+  ImageId:
+    Default: ami-003142662771177
+  SubnetId: 
+    Type: String
+    Default: subnet-221889100101
+Resources:
+  MyEC2Instances:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType 
+      ImageId: !Ref ImageId
+      SubnetId: !Ref SubnetId
+  SecurityGroupIds:
+  - !GetAtt SG.GroupId
+SG:
+  Type: AWS::EC2::SecurityGroup
+  Properties:
+    GroupDescription: Allow http to client host
+    vpcId: !Ref myVPC
+    SecurityGroupIngress: 
+      - ipProtocol: -1
+        FromPort: -1
+        ToPort: -1
+        CidrIp: 0.0.0.0/0
+    SecurityGroupEgress:
+      - IpProtocol: -1
+        FromPort: -1
+        ToPort: -1
+        CidrIp: 0.0.0./0
+
+  
+    
