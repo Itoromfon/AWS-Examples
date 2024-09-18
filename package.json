@@ -1,0 +1,20 @@
+{
+  "name": "aws-examples",
+  "version": "1.0.0",
+  "description": "We need to create a new user with no permissions and generate out access keys",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Itoromfon/AWS-Examples.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Itoromfon/AWS-Examples/issues"
+  },
+  "homepage": "https://github.com/Itoromfon/AWS-Examples#readme"
+}
