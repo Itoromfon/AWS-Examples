@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: "AWS::Serverless-2016-10-31"
+Description: Create a role for us to assume and create a resource we'll have access to.
+Resources:
+  InlineLambda:
+    Type: 'AWS::Serverless::Function'
+    Metadata:
+       DockerContext: ../
+      Dockerfile: Dockerfile
+    Properties:
+    Handler: function.handler
+    Runtime: python3.12
+    PackageType: Zip
+    CodeUrl: "./function/"
+  
